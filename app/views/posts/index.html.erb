@@ -1,1 +1,88 @@
 <h1>Post index</h1>
+
+
+<div>
+  <div id="map" style='height: 400px;'></div>
+</div>
+
+
+<script type="text/javascript">
+
+// "lat": location.coords.latitude,
+//         "lng": location.coords.longitude
+
+
+window.onload = function () {
+  var location = navigator.geolocation.getCurrentPosition(function(location){
+    console.log(location)
+
+    var mapOptions = {
+      center: new google.maps.LatLng(location.coords.latitude, location.coords.longitude),
+      zoom: 18,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+
+    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    //Attach click event handler to the map.
+
+    var newMarkers = []
+      google.maps.event.addListener(map, 'click', function (e) {
+        if (newMarkers.length < 1) {
+
+          var location = e.latLng;
+
+          var marker = new google.maps.Marker({
+            position: location,
+            map: map
+          });
+          var lat = location.lat();
+          var long = location.lng();
+
+          $.ajax({
+            method: "GET",
+            url: "<%= new_post_url %>",
+            data: {longitude: long, latitude: lat},
+            dataType: "html"
+          })
+            .done(function (data) {
+              console.log(data);
+              var infoWindow = new google.maps.InfoWindow({
+                content: data
+                // 'Latitude: ' + location.lat() + '<br />Longitude: ' + location.lng()
+              });
+              infoWindow.open(map, marker);
+              newMarkers.push(marker)
+            })
+        }
+      });
+  })
+
+};
+
+// navigator.geolocation.getCurrentPosition(function(location){
+//   handler = Gmaps.build('Google');
+//   var map = handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+//     markers = handler.addMarkers([
+//       {
+//         "lat": location.coords.latitude,
+//         "lng": location.coords.longitude
+//       }
+//     ]);
+//     handler.bounds.extendWith(markers);
+//     handler.fitMapToBounds();
+//     handler.getMap().setZoom(17);
+//   });
+//
+// })
+//
+// google.maps.event.addListener(map, 'click', function(event) {
+//    placeMarker(event.latLng);
+// });
+//
+// function placeMarker(location) {
+//     var marker = new google.maps.Marker({
+//         position: location,
+//         map: map
+//     });
+// }
+</script>

@@ -1,0 +1,15 @@
+<div class = 'well bs-component'>
+  <legend>Create a post</legend>
+  <%= simple_form_for(@post || Post.new, url:posts_path) do |f| %>
+    <%= f.input :title %>
+    <%= f.input :body %>
+    <%= f.input :image %>
+    <% if @longitude && @latitude %>
+      <%= f.hidden_field :longitude, value: @longitude  %>
+      <%= f.hidden_field :latitude, value: @latitude  %>
+    <% end %>
+    <div class='map-button'>
+      <%= f.button :submit, class: "btn btn-primary"%>
+    </div>
+  <% end %>
+</div>
