@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :find_user, only: [:edit, :update, :edit_password, :update_password]
 
   def new
+    Rails.logger.debug("location" + request.location.inspect)
     @user = User.new
   end
 

@@ -4,6 +4,9 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @longitude = params[:longitude]
+    @latitude = params[:latitude]
+    render partial: 'new'
   end
 
   def create
@@ -11,7 +14,7 @@ class PostsController < ApplicationController
     @post.user = current_user
 
     if @post.save
-      redirect_to post_path(@post), notice: "Post created!"
+      redirect_to root_path, notice: "Post created!"
     else
       flash[:alert] = "Post not created!"
       render :new

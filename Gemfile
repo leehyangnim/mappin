@@ -19,7 +19,10 @@ gem "font-awesome-rails"
 gem 'bootstrap-sass'
 gem 'simple_form'
 gem 'quiet_assets'
-
+gem "geocoder"
+gem 'underscore-rails'
+gem 'gmaps4rails'
+gem 'httparty'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -42,6 +45,9 @@ gem 'bcrypt', '~> 3.1.7'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'pry'
+  gem 'pry-rails'
+  gem 'pry-byebug'
 end
 
 group :development do
