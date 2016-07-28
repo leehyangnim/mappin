@@ -2,7 +2,7 @@
 
 
 <div>
-  <div id="map" style='height: 400px;'></div>
+  <div id="map" style='height: 500px;'></div>
 </div>
 
 
@@ -12,50 +12,123 @@
 //         "lng": location.coords.longitude
 
 
+
 window.onload = function () {
+
   var location = navigator.geolocation.getCurrentPosition(function(location){
-    console.log(location)
+    // var calculatedAdjustedLat = function(map, newInfoWindow, lat) {
+    //   var top = map.getBounds()['R'].j
+    //   console.log(top)
+    //   var newCenter = lat + ( (top - lat) / 2 )
+    //   return newCenter
+    // }
+
 
     var mapOptions = {
       center: new google.maps.LatLng(location.coords.latitude, location.coords.longitude),
-      zoom: 18,
+      zoom: 17,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
     var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-    //Attach click event handler to the map.
+    var markers = <%= raw @markers_hash.to_json %>
+
+    var newPostMarker = function(lat, lng) {
+      $.ajax({
+        method: "GET",
+        url: "<%= new_post_url %>",
+        data: {longitude: lng, latitude: lat},
+        dataType: "html"
+      })
+        .done(function (data) {
+          console.log(data);
+          newMarker.infoWindow = new google.maps.InfoWindow({
+            zIndex: 3,
+            content: data
+            // 'Latitude: ' + location.lat() + '<br />Longitude: ' + location.lng()
+          });
+          newMarker.infoWindow.open(map, newMarker);
+          // google.maps.event.addListener(map, 'zoom_changed', function(e) {
+          //   var infoPosition = newMarker.infoWindow.getPosition()
+          //   map.setCenter(pos)
+          //   var pos = {lng: infoPosition.lng(), lat: (infoPosition.lat() + calculatedAdjustedLat(map, newMarker.infoWindow, infoPosition.lat()))};
+          //   console.log(map.getBounds());
+          //
+          // })
+          google.maps.event.addListener(newMarker.infoWindow,'closeclick',function(){
+            newMarker.setMap(null)
+            newMarker = null;
+            newMarkers = [];
+            google.maps.event.clearListeners(map, 'zoom_changed');
+          });
+        })
+
+    }
+
+
+
+
+    for (var i = 0; i < markers.length; i++) {
+      var marker = new google.maps.Marker({
+        position: {lat: markers[i].lat, lng: markers[i].lng},
+        map: map,
+        body: markers[i].infowindow
+      });
+
+      // $.ajax({
+      //   method: "GET",
+      //   url: "/posts/" + markers[i].id,
+      //   data: {longitude: long, latitude: lat},
+      //   dataType: "html"
+      // })
+      var infoWindow = new google.maps.InfoWindow({
+        zIndex: 1,
+        content: markers[i].infowindow
+        // 'Latitude: ' + location.lat() + '<br />Longitude: ' + location.lng()
+      });
+      infoWindow.open(map, marker);
+    }
+
 
     var newMarkers = []
-      google.maps.event.addListener(map, 'click', function (e) {
-        if (newMarkers.length < 1) {
+    var newMarker
+    google.maps.event.addListener(map, 'click', function (e) {
+      if (newMarkers.length < 1) {
 
-          var location = e.latLng;
+        var location = e.latLng;
+        console.log(location)
+        newMarker = new google.maps.Marker({
+          position: location,
+          map: map,
+          draggable: true
+        });
 
-          var marker = new google.maps.Marker({
-            position: location,
-            map: map
-          });
-          var lat = location.lat();
-          var long = location.lng();
+        newMarkers.push(newMarker)
 
-          $.ajax({
-            method: "GET",
-            url: "<%= new_post_url %>",
-            data: {longitude: long, latitude: lat},
-            dataType: "html"
-          })
-            .done(function (data) {
-              console.log(data);
-              var infoWindow = new google.maps.InfoWindow({
-                content: data
-                // 'Latitude: ' + location.lat() + '<br />Longitude: ' + location.lng()
-              });
-              infoWindow.open(map, marker);
-              newMarkers.push(marker)
-            })
-        }
-      });
+        var position
+        console.log(position)
+        google.maps.event.addListener(newMarker, "dragend", function() {
+         position = newMarker.getPosition();
+         if (newMarker.infoWindow){
+           newMarker.infoWindow.close();
+         }
+         console.log(position.lng() + " and " + position.lat())
+         newPostMarker(position.lat(), position.lng())
+        });
+
+
+        var lat = location.lat();
+        var lng = location.lng();
+
+
+        newPostMarker(lat, lng);
+      }
+    });
+
   })
+
+
+
 
 };
 
