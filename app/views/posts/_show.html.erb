@@ -1,0 +1,24 @@
+<div class="posts" id="<%= dom_id(post) %>">
+<% comment = Comment.new %>
+<% comments = post.comments %>
+
+<div>
+  <h4><%= post.title %></h4>
+  <p>Body : <%= post.body %></p>
+</div>
+<br>
+
+<h6> Comments </h6>
+<div class='comments' id= "<%= dom_id(post) %>">
+  <% comments.each do |comment| %>
+    <div id="<%= dom_id(comment) %>">
+      <%= render "/comments/comment", comment: comment %>
+    </div>
+  <% end %>
+</div>
+
+<h6>Creat a new comment</h6>
+<div class="comment-form" id= "<%= dom_id(post) %>">
+  <%= render "/comments/form", comment: comment, post: post %>
+</div>
+</div>

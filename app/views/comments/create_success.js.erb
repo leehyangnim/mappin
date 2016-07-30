@@ -1,0 +1,9 @@
+<% post = @comment.post %>
+
+var newCommentHtml = "<%= j(render('/comments/comment', {comment: @comment})) %>";
+console.log(newCommentHtml)
+
+$('.comments#<%= "post_#{post.id}" %>').append(newCommentHtml);
+
+<% comment = Comment.new %>
+$('.comment-form#<%= "post_#{post.id}" %>').html('<%= j render "form", {comment: comment, post: post} %>')

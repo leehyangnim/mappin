@@ -27,6 +27,13 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.order("created_at DESC")
+    
+    @markers_hash =  Gmaps4rails.build_markers(@posts) do |post, marker|
+                        marker.lat post.latitude
+                        marker.lng post.longitude
+                        marker.infowindow render_to_string partial: 'show', locals: {post: post}
+                        # marker.id post.id
+                      end
   end
 
   def edit
