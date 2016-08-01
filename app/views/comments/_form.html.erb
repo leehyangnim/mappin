@@ -1,4 +1,4 @@
 <%= simple_form_for([post, comment], url: post_comments_path(post, comment), remote: true) do |f| %>
-    <%= f.input :body %>
+    <%= f.input :body, label: false %>
     <%= f.button :submit, class: "btn btn-primary" %>
 <% end %>

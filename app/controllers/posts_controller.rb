@@ -27,13 +27,18 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.order("created_at DESC")
-    
+
     @markers_hash =  Gmaps4rails.build_markers(@posts) do |post, marker|
                         marker.lat post.latitude
                         marker.lng post.longitude
                         marker.infowindow render_to_string partial: 'show', locals: {post: post}
-                        # marker.id post.id
+                        marker.json(id: post.id)
                       end
+  end
+
+  def cluster
+    @marker_ids = params[:marker_ids]
+    render paritial: "cluster", :layout => false
   end
 
   def edit
@@ -56,7 +61,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :body, :image, :address, :longitude, :latitude)
+    params.require(:post).permit(:title, :body, :image, :address, :longitude, :latitude,  {image: []})
   end
 
   def find_post
@@ -67,10 +72,6 @@ class PostsController < ApplicationController
     redirect_to root_path, alert: "access denied" unless can? :manage, @post
   end
 
-  def current_user_vote
-    @post.vote_for(current_user)
-  end
-  helper_method :current_user_vote
 
 
 end

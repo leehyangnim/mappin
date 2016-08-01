@@ -1,0 +1,8 @@
+
+
+<% @marker_ids.each do |id| %>
+<div class="well">
+  <% post = Post.find id %>
+  <%= render partial: "show", locals: {post: post} %>
+</div>
+<% end %>

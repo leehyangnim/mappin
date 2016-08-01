@@ -1,0 +1,2 @@
+$('#<%= dom_id(@post) %>_like .post-like-form').remove()
+$('#<%= dom_id(@post) %>_like').append('<%= j render "form", post: @post %>')

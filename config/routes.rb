@@ -2,6 +2,9 @@ Rails.application.routes.draw do
 
   root "posts#index"
 
+  get "/auth/facebook", as: :sign_in_with_facebook
+  get "/auth/facebook/callback" => "callbacks#facebook"
+
   get "/users/edit_password" => "users#edit_password", as: :edit_password
   patch "users"             => "users#update_password", as: :update_password
 
@@ -15,6 +18,8 @@ Rails.application.routes.draw do
   end
 
   resources :posts do
+    get :cluster, on: :collection
+    resources :post_likes, only: [:create,:destroy]
     resources :comments, only: [:create, :destroy]
   end
 

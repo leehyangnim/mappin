@@ -30,6 +30,7 @@ window.onload = function () {
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
+
     var map = new google.maps.Map(document.getElementById("map"), mapOptions);
     var markers = <%= raw @markers_hash.to_json %>
 
@@ -62,100 +63,111 @@ window.onload = function () {
             google.maps.event.clearListeners(map, 'zoom_changed');
           });
         })
+    }
+
+    var clusterInfo = function(markercluster) {
 
     }
 
 
 
-
+    var markerArray = [];
     for (var i = 0; i < markers.length; i++) {
       var marker = new google.maps.Marker({
         position: {lat: markers[i].lat, lng: markers[i].lng},
         map: map,
-        body: markers[i].infowindow
       });
 
-      // $.ajax({
-      //   method: "GET",
-      //   url: "/posts/" + markers[i].id,
-      //   data: {longitude: long, latitude: lat},
-      //   dataType: "html"
-      // })
-      var infoWindow = new google.maps.InfoWindow({
+      marker.id = markers[i].id
+      marker.infowindow = new google.maps.InfoWindow({
         zIndex: 1,
-        content: markers[i].infowindow
-        // 'Latitude: ' + location.lat() + '<br />Longitude: ' + location.lng()
+        content: markers[i].infowindow,
+        position: {lat: markers[i].lat, lng: markers[i].lng}
       });
-      infoWindow.open(map, marker);
+      markerArray.push(marker)
     }
+
+
+
+    // google.maps.addListener(markers[1],  function() {
+    //   console.log("dasdsa")
+    // })
+
+
+    window.markerCluster = new MarkerClusterer(map, markerArray, {zoomOnClick: false})
+    var markers = markerCluster.markers_
+
+    google.maps.event.addListener(markerCluster, 'click', function(clickedCluster) {
+      console.log("kjnkjn")
+      var cluster = clickedCluster.getMarkers()
+      var marker_ids = []
+      var center = clickedCluster.getCenter()
+      // var marker = cluster[0]
+      // var infoPosition = {lat: marker.position.lat(), lng: marker.position.lng()}
+      cluster.forEach(function(marker) {
+        marker_ids.push(marker.id)
+      })
+      console.log(marker_ids)
+
+      $.ajax({
+        method: "GET",
+        url: "<%= cluster_posts_url %>",
+        data: {marker_ids: marker_ids},
+        dataType: "html"
+      })
+      .done( function (data){
+        clickedCluster.infoWindow = new google.maps.InfoWindow({
+          zIndex: 3,
+          content: data,
+          position: center
+          // 'Latitude: ' + location.lat() + '<br />Longitude: ' + location.lng()
+        });
+        clickedCluster.infoWindow.open(map);
+      })
+    })
+
+    // markerCluster.getClusters()
 
 
     var newMarkers = []
     var newMarker
     google.maps.event.addListener(map, 'click', function (e) {
-      if (newMarkers.length < 1) {
+      if (map.getZoom() >= 17) {
+        if (newMarkers.length < 1) {
 
-        var location = e.latLng;
-        console.log(location)
-        newMarker = new google.maps.Marker({
-          position: location,
-          map: map,
-          draggable: true
-        });
+          var location = e.latLng;
+          console.log(location)
+          newMarker = new google.maps.Marker({
+            position: location,
+            map: map,
+            draggable: true
+          });
 
-        newMarkers.push(newMarker)
+          newMarkers.push(newMarker)
 
-        var position
-        console.log(position)
-        google.maps.event.addListener(newMarker, "dragend", function() {
-         position = newMarker.getPosition();
-         if (newMarker.infoWindow){
-           newMarker.infoWindow.close();
-         }
-         console.log(position.lng() + " and " + position.lat())
-         newPostMarker(position.lat(), position.lng())
-        });
-
-
-        var lat = location.lat();
-        var lng = location.lng();
+          var position
+          console.log(position)
+          google.maps.event.addListener(newMarker, "dragend", function() {
+            position = newMarker.getPosition();
+            if (newMarker.infoWindow){
+              newMarker.infoWindow.close();
+            }
+            console.log(position.lng() + " and " + position.lat())
+            newPostMarker(position.lat(), position.lng())
+          });
 
 
-        newPostMarker(lat, lng);
+          var lat = location.lat();
+          var lng = location.lng();
+
+
+          newPostMarker(lat, lng);
+        }
       }
     });
 
   })
-
-
-
-
 };
 
-// navigator.geolocation.getCurrentPosition(function(location){
-//   handler = Gmaps.build('Google');
-//   var map = handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-//     markers = handler.addMarkers([
-//       {
-//         "lat": location.coords.latitude,
-//         "lng": location.coords.longitude
-//       }
-//     ]);
-//     handler.bounds.extendWith(markers);
-//     handler.fitMapToBounds();
-//     handler.getMap().setZoom(17);
-//   });
-//
-// })
-//
-// google.maps.event.addListener(map, 'click', function(event) {
-//    placeMarker(event.latLng);
-// });
-//
-// function placeMarker(location) {
-//     var marker = new google.maps.Marker({
-//         position: location,
-//         map: map
-//     });
-// }
+
 </script>

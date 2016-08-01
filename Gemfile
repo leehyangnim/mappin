@@ -23,6 +23,10 @@ gem "geocoder"
 gem 'underscore-rails'
 gem 'gmaps4rails'
 gem 'httparty'
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'fog'
+gem 'omniauth-facebook'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
