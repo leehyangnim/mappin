@@ -1,26 +1,36 @@
-<div class="col-md-8 col-md-offset-2">
-<%= form_tag(sessions_path) do %>
-  <form class="form-horizontal">
-  <fieldset>
-    <h1>Sign In</h1>
-    <div class="form-group">
-        <%= label_tag :email, "Email:", class: "col-lg-2 control-label"%>
-      <div class="col-lg-10">
-        <%= email_field_tag :email, nil, class: "form-control" %>
-      </div>
-    </div>
-    <div class="form-group">
-      <%= label_tag :password, "Password:", class: "col-lg-2 control-label" %>
-      <div class="col-lg-10">
-        <%= password_field_tag :password, nil, class: "form-control" %>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="col-lg-10 col-lg-offset-2">
-        <%= submit_tag "Sign in", class: "btn btn-primary" %>
-      </div>
-    </div>
-  </fieldset>
-  </form>
-<% end %>
-</div>
+<head>
+<link rel='stylesheet' href='http://fonts.googleapis.com/css?family=PT+Sans:400,700'>
+<link rel="stylesheet" href="assets/reset.css">
+<link rel="stylesheet" href="assets/supersized.css">
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/jquery-1.8.2.min.js"></script>
+<script src="assets/supersized.3.2.7.min.js"></script>
+<script src="assets/supersized-init.js"></script>
+<script src="assets/scripts.js"></script>
+</head>
+<body>
+        <div class="page-container">
+          <div class="sub">
+            <h1>Login</h1>
+          <%= form_tag(sessions_path) do %>
+
+          <%= email_field_tag :email, nil, class: "username", placeholder: "Email" %>
+
+          <%= password_field_tag :password, nil, class: "password", placeholder: "Password" %>
+            <%= submit_tag "Sign me in", class: "button"%>
+          <% end %>
+
+            <%= button_to "Sign up", new_user_path, class: "button", id: "signup", method: :get %>
+
+                <div class="error"><span>+</span></div>
+            </form>
+            <div class="connect">
+                <p>Or connect with:</p>
+                <p>
+                    <a class="facebook" href="/auth/facebook"></a>
+                    <a class="twitter" href=""></a>
+                </p>
+            </div>
+          </div>
+        </div>
+</body>

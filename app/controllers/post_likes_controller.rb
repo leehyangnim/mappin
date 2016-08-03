@@ -6,7 +6,7 @@ class PostLikesController < ApplicationController
     post_like = PostLike.new(user: current_user, post: @post)
     post_like.save
     respond_to do |format|
-      format.html { redirect_to root_path, notice: "Liked!" }
+      format.html { redirect_to posts_path, notice: "Liked!" }
       format.js { render}
     end
   end
@@ -16,7 +16,7 @@ class PostLikesController < ApplicationController
     @post = Post.find params[:post_id]
     post_like.destroy
     respond_to do |format|
-      format.html { redirect_to root_path, notice: "Unliked!" }
+      format.html { redirect_to posts_path, notice: "Unliked!" }
       format.js { render }
     end
   end

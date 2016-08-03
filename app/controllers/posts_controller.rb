@@ -14,7 +14,7 @@ class PostsController < ApplicationController
     @post.user = current_user
 
     if @post.save
-      redirect_to root_path, notice: "Post created!"
+      redirect_to posts_path, notice: "Post created!"
     else
       flash[:alert] = "Post not created!"
       render :new
@@ -69,7 +69,7 @@ class PostsController < ApplicationController
   end
 
   def authorize_owner
-    redirect_to root_path, alert: "access denied" unless can? :manage, @post
+    redirect_to posts_path, alert: "access denied" unless can? :manage, @post
   end
 
 

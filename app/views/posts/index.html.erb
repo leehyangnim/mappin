@@ -1,5 +1,18 @@
-<h1>Post index</h1>
+<%= link_to "All Posts", posts_path %>
 
+<% if user_signed_in? %>
+  Hello <%= current_user.email %>
+  |
+  <%= link_to "Sign Out", sessions_path, method: :delete %>
+<% end %>
+
+<hr>
+
+<% if flash[:notice] %>
+  <div class="flash-notice"><%= flash[:notice] %></div>
+<% elsif flash[:alert] %>
+  <div class="flash-alert"><%= flash[:alert] %></div>
+<% end %>
 
 <div>
   <div id="map" style='height: 500px;'></div>
@@ -84,7 +97,11 @@ window.onload = function () {
         content: markers[i].infowindow,
         position: {lat: markers[i].lat, lng: markers[i].lng}
       });
-      markerArray.push(marker)
+      // google.maps.event.addListener(marker, "click", function(marker) {
+      //   console.log("single marker!")
+      //   // marker.infowindow.open(map)
+      // })
+      markerArray.push(marker);
     }
 
 
@@ -97,8 +114,15 @@ window.onload = function () {
     window.markerCluster = new MarkerClusterer(map, markerArray, {zoomOnClick: false})
     var markers = markerCluster.markers_
 
+    for (var i = 0; i < markerArray.length; i++) {
+      google.maps.event.addListener(markerArray[i], 'click', function() {
+        this.infoWindow = new google.maps.InfoWindow({zIndex: 3, content: this.infowindow.content, position: {lat: this.position.lat() + 0.0005, lng: this.position.lng()}});
+        this.infoWindow.open(map, this);
+      });
+    }
+
     google.maps.event.addListener(markerCluster, 'click', function(clickedCluster) {
-      console.log("kjnkjn")
+      console.log(clickedCluster)
       var cluster = clickedCluster.getMarkers()
       var marker_ids = []
       var center = clickedCluster.getCenter()
@@ -124,6 +148,12 @@ window.onload = function () {
         });
         clickedCluster.infoWindow.open(map);
       })
+      for (var i = 0; i < markerArray.length; i++) {
+        google.maps.event.addListener(markerArray[i], 'click', function() {
+          this.infoWindow = new google.maps.InfoWindow({zIndex: 3, content: this.infowindow.content, position: {lat: this.position.lat() + 0.0005, lng: this.position.lng()}});
+          this.infoWindow.open(map, this);
+        });
+      }
     })
 
     // markerCluster.getClusters()

@@ -11,6 +11,9 @@
  * file per style scope.
  *
  *= require font-awesome
+ *= require reset
+ *= require style
+ *= require supersized
  *= require_tree .
  *= require_self
  */

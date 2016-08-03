@@ -6,31 +6,14 @@
   <script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
   <script src='//cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js' type='text/javascript'></script>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
 </head>
 <body>
   <div class='container'>
-    <%= link_to "All Posts", posts_path %>
 
-    <% if user_signed_in? %>
-      Hello <%= current_user.email %>
-      |
-      <%= link_to "Sign Out", sessions_path, method: :delete %>
-    <% else %>
-      <%= link_to "Sign Up", new_user_path %>
-      |
-      <%= link_to "Sign In", new_session_path %>
-      |
-      <%= link_to "Sign In With Facebook", sign_in_with_facebook_path %>
-    <% end %>
-    <hr>
-
-    <% if flash[:notice] %>
-      <div class="flash-notice"><%= flash[:notice] %></div>
-    <% elsif flash[:alert] %>
-      <div class="flash-alert"><%= flash[:alert] %></div>
-    <% end %>
     <%= yield %>
   </div>
 </body>
