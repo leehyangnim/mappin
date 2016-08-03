@@ -2,7 +2,6 @@ class UsersController < ApplicationController
   before_action :find_user, only: [:edit, :update, :edit_password, :update_password]
 
   def new
-    Rails.logger.debug("location" + request.location.inspect)
     @user = User.new
   end
 
@@ -10,7 +9,7 @@ class UsersController < ApplicationController
     @user = User.new user_params
     if @user.save
       sign_in(@user)
-      redirect_to root_path, notice: "You're now signed up!"
+      redirect_to posts_path, notice: "You're now signed up!"
     else
       render :new
     end
@@ -21,7 +20,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update user_params
-      redirect_to root_path, notice: "Information updated!"
+      redirect_to posts_path, notice: "Information updated!"
     else
       render :edit
     end
@@ -33,7 +32,7 @@ class UsersController < ApplicationController
   def update_password
     if @user.authenticate(user_params[:password]) && @user.authenticate(user_params[:new_password]) == false
       @user.update(password: user_params[:new_password], password_confirmation: user_params[:password_confirmation])
-      redirect_to root_path, notice: "Password updated!"
+      redirect_to posts_path, notice: "Password updated!"
     else
       if @user.authenticate(user_params[:password]) == false
         flash[:alert] = "Incorrect password"

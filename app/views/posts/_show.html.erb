@@ -1,3 +1,4 @@
+<div class="well">
 <div class="posts" id="<%= dom_id(post) %>">
   <% comment = Comment.new %>
   <% comments = post.comments %>
@@ -25,4 +26,5 @@
   <div class="comment-form" id= "<%= dom_id(post) %>">
     <%= render "/comments/form", comment: comment, post: post %>
   </div>
+</div>
 </div>

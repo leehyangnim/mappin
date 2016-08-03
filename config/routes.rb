@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root "posts#index"
+  root "sessions#new"
 
   get "/auth/facebook", as: :sign_in_with_facebook
   get "/auth/facebook/callback" => "callbacks#facebook"

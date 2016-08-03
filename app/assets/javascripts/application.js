@@ -12,7 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+//= require jquery-1.8.2.min
+//= require scripts
+//= require supersized-init
+//= require supersized.3.2.7.min
 //= require underscore
 //= require gmaps/google
 //= require_tree .

@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to root_path, notice: "Comment created"}
+        format.html { redirect_to posts_path, notice: "Comment created"}
         format.js { render :create_success }
       else
         format.html { render "/posts/show" }
@@ -22,7 +22,7 @@ class CommentsController < ApplicationController
     @comment  = Comment.find params[:id]
     @comment.destroy
     respond_to do |format|
-      format.html { redirect_to root_path, notice: "Comment deleted" }
+      format.html { redirect_to posts_path, notice: "Comment deleted" }
       # format.js {render :destroy_success}
       format.js { render } # render /app/views/answers/destroy.js.erb
     end
