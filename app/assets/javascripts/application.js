@@ -10,7 +10,9 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+
 //= require jquery
+//= require bootstrap-sprockets
 //= require jquery_ujs
 //= require jquery-1.8.2.min
 //= require scripts
@@ -19,3 +21,8 @@
 //= require underscore
 //= require gmaps/google
 //= require_tree .
+
+
+$(document).ready(function() {
+    $(".dropdown-toggle").dropdown();
+});

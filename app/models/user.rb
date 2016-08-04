@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   has_many :post_likes, dependent: :destroy
   has_many :liked_posts, through: :post_likes, source: :post
 
+  has_many :notifications, dependent: :destroy
+
   validates :email, presence: true,
                     uniqueness: true,
                     format: /\A[\w+\-.?]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i,

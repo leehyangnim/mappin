@@ -1,0 +1,16 @@
+<li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+            <span class="glyphicon glyphicon-flag">
+            </span>
+      <%= current_user.notifications.where(read:false).count %>
+      <span class="caret"></span></a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+      <li class="dropdown-header text-center">
+        Notifications
+      </li>
+      <%= render current_user.notifications.where(read:false).order('created_at DESC') %>
+    </ul>
+  </li>
+<li>
+</li>
+</li>

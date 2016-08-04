@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160801225931) do
+ActiveRecord::Schema.define(version: 20160804030916) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,21 @@ ActiveRecord::Schema.define(version: 20160801225931) do
 
   add_index "comments", ["post_id"], name: "index_comments_on_post_id", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "notified_by_id"
+    t.integer  "post_id"
+    t.integer  "identifier"
+    t.string   "notice_type"
+    t.boolean  "read",           default: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "notifications", ["notified_by_id"], name: "index_notifications_on_notified_by_id", using: :btree
+  add_index "notifications", ["post_id"], name: "index_notifications_on_post_id", using: :btree
+  add_index "notifications", ["user_id"], name: "index_notifications_on_user_id", using: :btree
 
   create_table "post_likes", force: :cascade do |t|
     t.integer  "post_id"
@@ -73,6 +88,9 @@ ActiveRecord::Schema.define(version: 20160801225931) do
 
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
+  add_foreign_key "notifications", "posts"
+  add_foreign_key "notifications", "users"
+  add_foreign_key "notifications", "users", column: "notified_by_id"
   add_foreign_key "post_likes", "posts"
   add_foreign_key "post_likes", "users"
   add_foreign_key "posts", "users"

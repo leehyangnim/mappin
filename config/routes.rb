@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'notifications/link_through'
+
   root "sessions#new"
 
   get "/auth/facebook", as: :sign_in_with_facebook
@@ -7,6 +9,9 @@ Rails.application.routes.draw do
 
   get "/users/edit_password" => "users#edit_password", as: :edit_password
   patch "users"             => "users#update_password", as: :update_password
+
+  get 'notifications/:id/link_through', to: 'notifications#link_through',
+                                       as: :link_through
 
   resources :users, only: [:new, :create] do
     get :edit, on: :collection

@@ -4,12 +4,14 @@
   <% comments = post.comments %>
 
   <div>
-    <h4><%= post.title %></h4>
+    <div id="containerTitle">
+    <h4><%= post.title %></h4><div id="<%= dom_id(post) %>_like">
+      <%= render "post_likes/form", post: post %>
+    </div></div>
+
     <p>Body : <%= post.body %></p>
     <p><%=  image_tag post.image.url(:medium) if post.image %></p>
-    <div id="<%= dom_id(post) %>_like">
-      <%= render "post_likes/form", post: post %>
-    </div>
+    </p>
   </div>
   <br>
 

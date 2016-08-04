@@ -1,19 +1,5 @@
-<%= link_to "All Posts", posts_path %>
-
-<% if user_signed_in? %>
-  Hello <%= current_user.email %>
-  |
-  <%= link_to "Sign Out", sessions_path, method: :delete %>
-<% end %>
-
-<hr>
-
-<% if flash[:notice] %>
-  <div class="flash-notice"><%= flash[:notice] %></div>
-<% elsif flash[:alert] %>
-  <div class="flash-alert"><%= flash[:alert] %></div>
-<% end %>
-
+<%= render "posts/navbar" %>
+<div class="container">
 <div>
   <div id="map" style='height: 500px;'></div>
 </div>
@@ -201,3 +187,4 @@ window.onload = function () {
 
 
 </script>
+</div>

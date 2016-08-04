@@ -1,9 +1,10 @@
 <div class="post-like-form">
-  Likes:
-  <%= post.post_likes.count %>
+  <p>
   <% if post.liked_by?(current_user)%>
     <%= link_to fa_icon("thumbs-up"), post_post_like_path(post, post.like_for(current_user)), method: :delete, remote: true, class: "like-icon"  %>
   <% else %>
     <%= link_to fa_icon("thumbs-o-up"), post_post_likes_path(post), method: :post, remote: true, class: "like-icon" %>
   <% end %>
+  <span>(<%= post.post_likes.count %>)</span>
+  </p>
 </div>

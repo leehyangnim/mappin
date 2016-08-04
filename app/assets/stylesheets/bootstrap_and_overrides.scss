@@ -8,10 +8,19 @@
 i {
   float: right;
   font-style: normal;
-  color: #bdc3c7;
+  color: black;
   cursor: pointer;
 }
 
+#containerTitle h1,
+#containerTitle div {
+    display: inline;
+}
+
+.post-like-form {
+  float: left;
+  color: black;
+}
 /*
  *
  * Template Name: Fullscreen Login
