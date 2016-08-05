@@ -1,24 +1,53 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-.map-button {
-  margin-top: 10px;
+input.button.post-button {
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+p {
+    word-break: break-all;
+    white-space: normal;
+}
+
+.name {
+  margin-top: 14px;
+  margin-right: 10px;
 }
 
 i {
-  float: right;
   font-style: normal;
   color: black;
   cursor: pointer;
 }
 
-#containerTitle h1,
-#containerTitle div {
-    display: inline;
+.titleform {
+    display: inline-block;
 }
 
+.glyphicon {
+  font-size: 15px;
+}
+.delete {
+  float: right;
+}
+
+i.fa-times{
+  color: white;
+}
+
+textarea {
+  width: 100%
+}
+
+i.fa-bell, i.fa-bell-o {
+  color: #bf0000;
+}
+.row {
+  margin-left: 3px;
+}
 .post-like-form {
-  float: left;
   color: black;
 }
 /*

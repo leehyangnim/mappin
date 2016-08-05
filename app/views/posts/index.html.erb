@@ -1,7 +1,7 @@
 <%= render "posts/navbar" %>
 <div class="container">
 <div>
-  <div id="map" style='height: 500px;'></div>
+  <div id="map" style='height: 600px;'></div>
 </div>
 
 
@@ -44,7 +44,8 @@ window.onload = function () {
           console.log(data);
           newMarker.infoWindow = new google.maps.InfoWindow({
             zIndex: 3,
-            content: data
+            content: data,
+            maxWidth: 400
             // 'Latitude: ' + location.lat() + '<br />Longitude: ' + location.lng()
           });
           newMarker.infoWindow.open(map, newMarker);
@@ -81,6 +82,7 @@ window.onload = function () {
       marker.infowindow = new google.maps.InfoWindow({
         zIndex: 1,
         content: markers[i].infowindow,
+        maxWidth: 400,
         position: {lat: markers[i].lat, lng: markers[i].lng}
       });
       // google.maps.event.addListener(marker, "click", function(marker) {
@@ -102,7 +104,7 @@ window.onload = function () {
 
     for (var i = 0; i < markerArray.length; i++) {
       google.maps.event.addListener(markerArray[i], 'click', function() {
-        this.infoWindow = new google.maps.InfoWindow({zIndex: 3, content: this.infowindow.content, position: {lat: this.position.lat() + 0.0005, lng: this.position.lng()}});
+        this.infoWindow = new google.maps.InfoWindow({zIndex: 3, content: this.infowindow.content, maxWidth:400, position: {lat: this.position.lat() + 0.0005, lng: this.position.lng()}});
         this.infoWindow.open(map, this);
       });
     }
@@ -129,14 +131,15 @@ window.onload = function () {
         clickedCluster.infoWindow = new google.maps.InfoWindow({
           zIndex: 3,
           content: data,
-          position: center
+          position: center,
+          maxWidth: 400
           // 'Latitude: ' + location.lat() + '<br />Longitude: ' + location.lng()
         });
         clickedCluster.infoWindow.open(map);
       })
       for (var i = 0; i < markerArray.length; i++) {
         google.maps.event.addListener(markerArray[i], 'click', function() {
-          this.infoWindow = new google.maps.InfoWindow({zIndex: 3, content: this.infowindow.content, position: {lat: this.position.lat() + 0.0005, lng: this.position.lng()}});
+          this.infoWindow = new google.maps.InfoWindow({zIndex: 3, content: this.infowindow.content, maxWidth:400, position: {lat: this.position.lat() + 0.0005, lng: this.position.lng()}});
           this.infoWindow.open(map, this);
         });
       }

@@ -1,32 +1,39 @@
 <div class="well">
-<div class="posts" id="<%= dom_id(post) %>">
-  <% comment = Comment.new %>
-  <% comments = post.comments %>
+  <div class="posts" id="<%= dom_id(post) %>">
+    <% comment = Comment.new %>
+    <% comments = post.comments %>
 
-  <div>
-    <div id="containerTitle">
-    <h4><%= post.title %></h4><div id="<%= dom_id(post) %>_like">
-      <%= render "post_likes/form", post: post %>
-    </div></div>
-
-    <p>Body : <%= post.body %></p>
-    <p><%=  image_tag post.image.url(:medium) if post.image %></p>
-    </p>
-  </div>
-  <br>
-
-  <h6> Comments </h6>
-  <div class='comments' id= "<%= dom_id(post) %>">
-    <% comments.each do |comment| %>
-      <div id="<%= dom_id(comment) %>">
-        <%= render "/comments/comment", comment: comment %>
+    <div class="row">
+      <div class="titleform" style="height: 50px">
+        <h3><%= post.title %></h3>
       </div>
-    <% end %>
-  </div>
+      <% if post.user == current_user %>
+        <div class="titleform"><span class="glyphicon glyphicon-sunglasses"></span></div> |
+      <% end %>
+      <div class="titleform" style="height: 50px" id="<%= dom_id(post) %>_like">
+        <%= render "post_likes/form", post: post %>
+      </div>
+    </div>
 
-  <h6>Creat a new comment</h6>
-  <div class="comment-form" id= "<%= dom_id(post) %>">
-    <%= render "/comments/form", comment: comment, post: post %>
+      <p>Body : <%= post.body %></p>
+      <p><%=  image_tag post.image.url(:medium) if post.image %></p>
+
+    </div>
+    <br>
+
+    <h6>Create a new comment</h6>
+    <div class="comment-form" id= "<%= dom_id(post) %>">
+      <%= render "/comments/form", comment: comment, post: post %>
+    </div>
+
+    <h6> Comments </h6>
+    <div class='comments' id= "<%= dom_id(post) %>">
+      <% comments.each do |comment| %>
+        <div id="<%= dom_id(comment) %>">
+          <%= render "/comments/comment", comment: comment %>
+        </div>
+      <% end %>
+    </div>
+
   </div>
-</div>
 </div>

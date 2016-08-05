@@ -2,10 +2,10 @@
 <div>
   <%= comment.body %>
   <% if comment.user == current_user %>
-    <i><%= link_to "x", post_comment_path(post, comment),
+    <span class="delete"><%= link_to fa_icon("times"), post_comment_path(post, comment),
                           method: :delete,
                           remote: true,
-                          data:   {confirm: "Are you sure?"}%></i>
+                          data:   {confirm: "Are you sure?"}%></span>
   <% end %>
   <hr>
 </div>

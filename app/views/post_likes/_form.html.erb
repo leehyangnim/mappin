@@ -5,6 +5,6 @@
   <% else %>
     <%= link_to fa_icon("thumbs-o-up"), post_post_likes_path(post), method: :post, remote: true, class: "like-icon" %>
   <% end %>
-  <span>(<%= post.post_likes.count %>)</span>
+  <%= post.post_likes.count %>
   </p>
 </div>
