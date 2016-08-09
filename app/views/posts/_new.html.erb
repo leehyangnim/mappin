@@ -1,5 +1,6 @@
-<div class = 'well bs-component'>
-  <legend>Create a post</legend>
+<div class = 'well'>
+  <legend>New Pin</legend>
+  <div class= 'new-post'>
   <%= simple_form_for(@post || Post.new, url:posts_path) do |f| %>
     <%= f.input :title %>
     <%= f.input :body %>
@@ -9,7 +10,8 @@
       <%= f.hidden_field :latitude, value: @latitude  %>
     <% end %>
     <div class='map-button'>
-      <%= f.button :submit, class: "btn btn-primary"%>
+      <%= f.button :submit%>
     </div>
   <% end %>
+</div>
 </div>

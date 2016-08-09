@@ -1,5 +1,5 @@
 <%= render "posts/navbar" %>
-<div class="container">
+<div class="container map">
 <div>
   <div id="map" style='height: 600px;'></div>
 </div>
@@ -41,7 +41,7 @@ window.onload = function () {
         dataType: "html"
       })
         .done(function (data) {
-          console.log(data);
+          // console.log(data);
           newMarker.infoWindow = new google.maps.InfoWindow({
             zIndex: 3,
             content: data,
@@ -110,7 +110,7 @@ window.onload = function () {
     }
 
     google.maps.event.addListener(markerCluster, 'click', function(clickedCluster) {
-      console.log(clickedCluster)
+      // console.log(clickedCluster)
       var cluster = clickedCluster.getMarkers()
       var marker_ids = []
       var center = clickedCluster.getCenter()
@@ -119,7 +119,7 @@ window.onload = function () {
       cluster.forEach(function(marker) {
         marker_ids.push(marker.id)
       })
-      console.log(marker_ids)
+      // console.log(marker_ids)
 
       $.ajax({
         method: "GET",
@@ -155,7 +155,7 @@ window.onload = function () {
         if (newMarkers.length < 1) {
 
           var location = e.latLng;
-          console.log(location)
+          // console.log(location)
           newMarker = new google.maps.Marker({
             position: location,
             map: map,
@@ -165,7 +165,7 @@ window.onload = function () {
           newMarkers.push(newMarker)
 
           var position
-          console.log(position)
+          // console.log(position)
           google.maps.event.addListener(newMarker, "dragend", function() {
             position = newMarker.getPosition();
             if (newMarker.infoWindow){

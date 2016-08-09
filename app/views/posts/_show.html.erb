@@ -3,37 +3,38 @@
     <% comment = Comment.new %>
     <% comments = post.comments %>
 
-    <div class="row">
+    <div class="row title">
       <div class="titleform" style="height: 50px">
-        <h3><%= post.title %></h3>
+        <h3><%= simple_format(post.title) %></h3>
       </div>
-      <% if post.user == current_user %>
-        <div class="titleform"><span class="glyphicon glyphicon-sunglasses"></span></div> |
-      <% end %>
       <div class="titleform" style="height: 50px" id="<%= dom_id(post) %>_like">
         <%= render "post_likes/form", post: post %>
       </div>
-    </div>
-
-      <p>Body : <%= post.body %></p>
-      <p><%=  image_tag post.image.url(:medium) if post.image %></p>
-
-    </div>
-    <br>
-
-    <h6>Create a new comment</h6>
-    <div class="comment-form" id= "<%= dom_id(post) %>">
-      <%= render "/comments/form", comment: comment, post: post %>
-    </div>
-
-    <h6> Comments </h6>
-    <div class='comments' id= "<%= dom_id(post) %>">
-      <% comments.each do |comment| %>
-        <div id="<%= dom_id(comment) %>">
-          <%= render "/comments/comment", comment: comment %>
-        </div>
+      <% if post.user == current_user %>
+      <div class="titleform">|<span class="glyphicon glyphicon-sunglasses"></span></div>
       <% end %>
     </div>
+      <p class="post-time"><%= post.created_at.strftime("%B %-d at %I:%M%P") %></p>
+      <p><%= simple_format(post.body) %></p>
+      <p><%=  image_tag post.image.url(:medium) if post.image %></p>
+
+  </div>
+  <br>
+
+  <h5>Add a Comment</h5>
+
+  <div class="comment-form" id= "<%= dom_id(post) %>">
+    <%= render "/comments/form", comment: comment, post: post %>
+  </div>
+  <br>
+  <div class='comments' id= "<%= dom_id(post) %>">
+    <h6>Comments</h6>
+    <% comments.each do |comment| %>
+      <div id="<%= dom_id(comment) %>">
+        <%= render "/comments/comment", comment: comment %>
+      </div>
+    <% end %>
+  </div>
 
   </div>
 </div>

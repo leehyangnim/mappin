@@ -4,11 +4,30 @@
 input.button.post-button {
   margin-top: 5px;
   margin-bottom: 15px;
+  width: 100%;
 }
 
+.navbar-default .navbar-nav > li > a {
+    color: white;
+}
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .open > a:visited {
+  color: white;
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+  color: white;
+}
+form#new_comment {
+  width: 100%
+}
 p {
     word-break: break-all;
     white-space: normal;
+}
+
+.glyphicon-sunglasses:before {
+  margin-left: 6px;
 }
 
 .name {
@@ -23,29 +42,54 @@ i {
 }
 
 .titleform {
-    display: inline-block;
+  display: inline-block;
 }
 
 .glyphicon {
   font-size: 15px;
 }
-.delete {
-  float: right;
-}
+// .delete {
+//   float: right;
+// }
 
 i.fa-times{
-  color: white;
+  color:#b1b1b1;
 }
 
-textarea {
-  width: 100%
+
+#comment_body {
+  width: 100%;
+  height: 60px;
+  background-color: white;
+  margin-bottom: 5px;
+  margin-top:0px;
 }
 
+
+div.new-post {
+  text-align: left;
+}
+
+div.input.string.required.post_title, div.input.text.required.post_body, div.input.file.optional.post_image {
+  text-align: left;
+}
 i.fa-bell, i.fa-bell-o {
-  color: #bf0000;
+  color: #fdb858;
 }
+i.fa-thumbs-up, i.fa-thumbs-o-up, i.fa-thumbs-up:before, i.fa-thumbs-o-up:before  {
+  color: #1855d0;
+}
+
+.comment-display {
+  display: inline-block;
+}
+
 .row {
-  margin-left: 3px;
+  margin-left: 2px;
+}
+.row.title {
+  margin-left: 0px;
+  height: 50px;
 }
 .post-like-form {
   color: black;
@@ -58,17 +102,39 @@ i.fa-bell, i.fa-bell-o {
  * Author URI: http://azmind.com
  *
  */
+img.logo {
+  width: 125px;
+  margin-left:70px;
+  margin-top: 3px;
+}
+
+ul.nav.navbar-nav.navbar-right {
+  margin-right: 45px;
+}
+
+.gm-style-iw {
+  width: 400px;
+}
+
+a.dropdown-toggle {
+  color: white;
+}
+
+li.signout {
+  color:white;
+}
+
 
 .well {
-  background-color: lightgrey;
+  background-color: #fafafa;
   text-align: left;
 }
 
 body {
-    background: #f8f8f8;
+    background-color: #f1f1f2;
     font-family: 'PT Sans', Helvetica, Arial, sans-serif;
     text-align: center;
-    color: #fff;
+    color: black;
 }
 
 .page-container {
@@ -88,7 +154,11 @@ form {
     text-align: center;
 }
 
-input {
+div.container.map {
+  width: 90%;
+}
+
+input, textarea {
     width: 270px;
     height: 42px;
     margin-top: 25px;
@@ -105,14 +175,22 @@ input {
     box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
     font-family: 'PT Sans', Helvetica, Arial, sans-serif;
     font-size: 14px;
-    color: #fff;
+    color: black;
     text-shadow: 0 1px 2px rgba(0,0,0,.1);
     -o-transition: all .2s;
     -moz-transition: all .2s;
     -webkit-transition: all .2s;
     -ms-transition: all .2s;
+    padding-left: 8px;
+    padding-right: 8px;
 }
 
+#post_title {
+  color: black;
+  padding-left: 8px;
+  padding-right: 8px;
+  width:100%;
+}
 input:-moz-placeholder { color: #fff; }
 input:-ms-input-placeholder { color: #fff; }
 input::-webkit-input-placeholder { color: #fff; }
