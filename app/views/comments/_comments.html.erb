@@ -1,4 +1,5 @@
-<% comments.each do |comment| %>
+
+<% comments.order('created_at ASC') .each do |comment| %>
   <div id="<%= dom_id(comment) %>">
     <%= render "comments/show_comment", comment: comment %>
   </div>

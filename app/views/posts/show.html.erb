@@ -5,7 +5,7 @@
     <div class="well post-show" style="width: 700px; margin-top: 20px;">
       <div class="posts" id="<%= dom_id(@post) %>">
         <% comment = Comment.new %>
-        <% comments = @post.comments %>
+        <% comments = @post.comments.order('created_at ASC') %>
 
         <div class="row title">
           <div class="titleform" style="height: 50px">
