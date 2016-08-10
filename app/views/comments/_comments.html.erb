@@ -1,0 +1,5 @@
+<% comments.each do |comment| %>
+  <div id="<%= dom_id(comment) %>">
+    <%= render "comments/show_comment", comment: comment %>
+  </div>
+<% end %>

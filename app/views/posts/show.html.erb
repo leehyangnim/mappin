@@ -2,7 +2,7 @@
 
 <div class="container">
   <div class="col-md-8 col-md-offset-2">
-    <div class="well post-show" style="width: 700px;">
+    <div class="well post-show" style="width: 700px; margin-top: 20px;">
       <div class="posts" id="<%= dom_id(@post) %>">
         <% comment = Comment.new %>
         <% comments = @post.comments %>
@@ -33,11 +33,7 @@
       <br>
       <div class='comments' id= "<%= dom_id(@post) %>">
         <h5 style="margin-bottom: 5px;">Comments</h5>
-        <% comments.each do |comment| %>
-          <div id="<%= dom_id(comment) %>">
-            <%= render "/comments/show_comment", comment: comment %>
-          </div>
-        <% end %>
+         <%= render "/comments/comments", comments: comments  %>
       </div>
 
       </div>

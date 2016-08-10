@@ -6,6 +6,7 @@ class CommentsController < ApplicationController
     @post = Post.find params[:post_id]
     @comment.post = @post
     @comment.user = current_user
+    @comments = @post.comments
 
     respond_to do |format|
       if @comment.save

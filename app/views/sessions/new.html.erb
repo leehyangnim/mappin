@@ -12,26 +12,28 @@
         <div class="page-container">
           <div class="sub">
             <h1>Login</h1>
-          <%= form_tag(sessions_path) do %>
+            <%= form_tag(sessions_path) do %>
+              <%= email_field_tag :email, nil, class: "username", placeholder: "Email" %>
+              <%= password_field_tag :password, nil, class: "password", placeholder: "Password" %>
+              <%= submit_tag "Sign In", class: "button signin-btn"%>
+            <% end %>
 
-          <%= email_field_tag :email, nil, class: "username", placeholder: "Email" %>
-
-          <%= password_field_tag :password, nil, class: "password", placeholder: "Password" %>
-            <%= submit_tag "Sign In", class: "button signin-btn"%>
-          <% end %>
-
+            <br>
+            <br>
             <div class="connect">
               <p>First Time to <img src='assets/logo3.png' style="  width: 100px; margin-bottom: -5px; margin-left: 1px;" /> ? </p>
 
               <div class="error"><span>+</span></div>
-            
-              <%= button_to "Sign Up", new_user_path, class: "button", id: "signup", method: :get %>
-            </form>
-                <p>Or Connect With:</p>
-                <p>
-                    <a class="facebook" href="/auth/facebook"></a>
-                    <a class="twitter" href=""></a>
-                </p>
+              <div class="row login">
+                <%= button_to "Sign Up", new_user_path, class: "button", id: "signup", method: :get %>
+                <span style="font-size: 16px; margin-top: 28px;
+                   margin-left: 10px;">Or</span>
+                <div class="facebook">
+                  <a class="facebook" href="/auth/facebook"></a>
+                  <a class="twitter" href=""></a>
+                  <p style="font-size: 16px;">Connect With:</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
