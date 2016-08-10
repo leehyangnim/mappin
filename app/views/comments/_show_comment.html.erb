@@ -1,0 +1,12 @@
+<% post = comment.post %>
+<div class='row'>
+  <div class="comment-display" style="width: 630px"><%= simple_format(comment.body) %></div>
+  <% if comment.user == current_user %>
+    <span class="delete comment-display" style="float: right; margin-right:20px"><%= link_to fa_icon("times"), post_comment_path(post, comment),
+                          method: :delete,
+                          remote: true,
+                          data:   {confirm: "Are you sure?"}%></span>
+  <% end %>
+  <p class="comment-time"><%= comment.created_at.strftime("%B %-d at %I:%M%P") %></p>
+</div>
+<hr>

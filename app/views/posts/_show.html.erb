@@ -1,20 +1,34 @@
 <div class="well">
-<div class="posts" id="<%= dom_id(post) %>">
-  <% comment = Comment.new %>
-  <% comments = post.comments %>
+  <div class="posts" id="<%= dom_id(post) %>">
+    <% comment = Comment.new %>
+    <% comments = post.comments.order('created_at ASC') %>
 
-  <div>
-    <h4><%= post.title %></h4>
-    <p>Body : <%= post.body %></p>
-    <p><%=  image_tag post.image.url(:medium) if post.image %></p>
-    <div id="<%= dom_id(post) %>_like">
-      <%= render "post_likes/form", post: post %>
+    <div class="row title">
+      <div class="titleform" style="height: 50px">
+        <h3><%= simple_format(post.title) %></h3>
+      </div>
+      <div class="titleform" style="height: 50px" id="<%= dom_id(post) %>_like">
+        <%= render "post_likes/form", post: post %>
+      </div>
+      <% if post.user == current_user %>
+      <div class="titleform">|<span class="glyphicon glyphicon-sunglasses"></span></div>
+      <% end %>
     </div>
+      <p class="post-time"><%= post.created_at.strftime("%B %-d at %I:%M%P") %></p>
+      <p><%= simple_format(post.body) %></p>
+      <p><%=  image_tag post.image.url(:medium) if post.image %></p>
+
   </div>
   <br>
 
-  <h6> Comments </h6>
+  <h5>Add a Comment</h5>
+
+  <div class="comment-form" id= "<%= dom_id(post) %>">
+    <%= render "/comments/form", comment: comment, post: post %>
+  </div>
+  <br>
   <div class='comments' id= "<%= dom_id(post) %>">
+    <h6>Comments</h6>
     <% comments.each do |comment| %>
       <div id="<%= dom_id(comment) %>">
         <%= render "/comments/comment", comment: comment %>
@@ -22,9 +36,5 @@
     <% end %>
   </div>
 
-  <h6>Creat a new comment</h6>
-  <div class="comment-form" id= "<%= dom_id(post) %>">
-    <%= render "/comments/form", comment: comment, post: post %>
   </div>
-</div>
 </div>

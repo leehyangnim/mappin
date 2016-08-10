@@ -27,6 +27,7 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'fog'
 gem 'omniauth-facebook'
+gem 'stream_rails'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

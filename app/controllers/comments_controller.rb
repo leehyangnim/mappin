@@ -3,11 +3,14 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new comment_params
-    @comment.post = Post.find params[:post_id]
+    @post = Post.find params[:post_id]
+    @comment.post = @post
     @comment.user = current_user
+    @comments = @post.comments
 
     respond_to do |format|
       if @comment.save
+        create_notification(@post, @comment)
         format.html { redirect_to posts_path, notice: "Comment created"}
         format.js { render :create_success }
       else
@@ -33,6 +36,15 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:body)
+  end
+
+  def create_notification(post, comment)
+    return if post.user.id == current_user.id
+    Notification.create(user: post.user,
+                        notified_by: current_user,
+                        post: post,
+                        identifier: comment.id,
+                        notice_type: 'comment')
   end
 
 end

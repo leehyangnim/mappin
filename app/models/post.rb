@@ -3,11 +3,13 @@ class Post < ActiveRecord::Base
 
   has_many :comments, dependent: :destroy
 
-  validates :title, presence: true
-  validates :body, presence: true
-
   has_many :post_likes, dependent: :destroy
   has_many :users, through: :post_likes
+
+  has_many :notifications, dependent: :destroy
+
+  validates :title, presence: true
+  validates :body, presence: true
 
   mount_uploader :image, ImageUploader
 

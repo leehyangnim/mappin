@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :find_post, only: [:show, :edit, :update, :destroy]
-  skip_before_action :authenticate_user!, only: [:show, :index]
+  before_action :authenticate_user!
 
   def new
     @post = Post.new
@@ -71,7 +71,6 @@ class PostsController < ApplicationController
   def authorize_owner
     redirect_to posts_path, alert: "access denied" unless can? :manage, @post
   end
-
 
 
 end
