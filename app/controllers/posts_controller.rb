@@ -11,6 +11,8 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new post_params
+    @post.body = emojify(post_params[:body])
+    @post.title = emojify(post_params[:title])
     @post.user = current_user
 
     if @post.save
@@ -72,5 +74,14 @@ class PostsController < ApplicationController
     redirect_to posts_path, alert: "access denied" unless can? :manage, @post
   end
 
+  def emojify(content)
+    content.gsub(/:([\w+-]+):/) do |match|
+      if emoji = Emoji.find_by_alias($1)
+        Emoji.find_by_alias($1).raw
+      else
+        match
+      end
+    end
+  end
 
 end
