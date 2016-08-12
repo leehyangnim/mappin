@@ -3,6 +3,7 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new comment_params
+    @comment.body = emojify(comment_params[:body])
     @post = Post.find params[:post_id]
     @comment.post = @post
     @comment.user = current_user
@@ -45,6 +46,16 @@ class CommentsController < ApplicationController
                         post: post,
                         identifier: comment.id,
                         notice_type: 'comment')
+  end
+
+  def emojify(content)
+    content.gsub(/:([\w+-]+):/) do |match|
+      if emoji = Emoji.find_by_alias($1)
+        Emoji.find_by_alias($1).raw
+      else
+        match
+      end
+    end
   end
 
 end

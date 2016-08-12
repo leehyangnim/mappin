@@ -28,6 +28,7 @@ gem 'mini_magick'
 gem 'fog'
 gem 'omniauth-facebook'
 gem 'stream_rails'
+gem 'gemoji'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
