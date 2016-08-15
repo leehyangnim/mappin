@@ -2,8 +2,6 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  before_action :set_ip
-
   protected
 
   def current_user
@@ -18,17 +16,6 @@ class ApplicationController < ActionController::Base
 
   def sign_in(user)
     session[:user_id] = user.id
-  end
-
-  def set_ip
-    if current_user
-      ip = request.remote_ip
-      if ["127.0.0.1", "::1"].include?(ip)
-        ip = HTTParty.get('http://api.ipify.org').body
-      end
-      current_user.ip_address = ip
-      current_user.save
-    end
   end
 
   def authenticate_user!
