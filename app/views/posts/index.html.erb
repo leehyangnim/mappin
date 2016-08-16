@@ -124,7 +124,7 @@
         var newMarkers = []
         var newMarker
         google.maps.event.addListener(map, 'click', function (e) {
-          if (map.getZoom() >= 17) {
+          if (map.getZoom() >= 15) {
             if (newMarkers.length < 1) {
 
               var location = e.latLng;
