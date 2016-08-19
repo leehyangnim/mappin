@@ -56,7 +56,11 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    redirect_to posts_path, notice: "Post deleted"
+    respond_to do |format|
+      format.html { redirect_to posts_path, notice: "Post deleted" }
+      # format.js {render :destroy_success}
+      format.js { render } # render /app/views/answers/destroy.js.erb
+    end
   end
 
 
