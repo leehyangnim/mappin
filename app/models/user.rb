@@ -47,6 +47,7 @@ class User < ActiveRecord::Base
 
   def self.find_or_create_from_twitter(twitter_data)
     user = User.where(uid: twitter_data["uid"], provider: twitter_data["provider"]).first
+    puts user
     user = create_from_twitter(twitter_data) unless user
     user
   end
