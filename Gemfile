@@ -28,6 +28,7 @@ gem 'fog'
 gem 'omniauth-facebook'
 gem 'gemoji'
 gem 'rails_12factor', group: :production
+gem 'omniauth-twitter'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
