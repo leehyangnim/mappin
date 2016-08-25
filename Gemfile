@@ -22,13 +22,13 @@ gem 'quiet_assets'
 gem "geocoder"
 gem 'underscore-rails'
 gem 'gmaps4rails'
-gem 'httparty'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'fog'
 gem 'omniauth-facebook'
-gem 'stream_rails'
 gem 'gemoji'
+gem 'rails_12factor', group: :production
+gem 'omniauth-twitter'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

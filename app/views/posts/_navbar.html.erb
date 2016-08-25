@@ -15,7 +15,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="color: white;">
         <% if user_signed_in? %>
       <ul class="nav navbar-nav navbar-right">
-          <li> <div class="name"> Hello <%= current_user.email %></div> </li>
+          <li> <div class="name"> Hello, <%= current_user.email %></div> </li>
           <%= render 'notifications/notification_dropdown' %>
           <li div="signout"><%= link_to "Sign Out", sessions_path, method: :delete %></li>
       </ul>

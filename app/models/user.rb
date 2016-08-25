@@ -15,14 +15,15 @@ class User < ActiveRecord::Base
                     unless: :using_oauth?
   validates :uid, uniqueness: {scope: :provider}, if: :using_oauth?
 
-  geocoded_by :ip_address
-  after_validation :geocode, if: ->(obj){ obj.ip_address.present? and obj.ip_address_changed?}
-
   def using_oauth?
     uid.present? && provider.present?
   end
 
+  PROVIDER_FACEBOOK = "facebook"
+  PROVIDER_TWITTER = "twitter"
+
   serialize :facebook_raw_data, Hash
+  serialize :twitter_raw_data, Hash
 
   def self.find_or_create_from_facebook(facebook_data)
     user = User.where(uid: facebook_data["uid"], provider: facebook_data["provider"] ).first
@@ -42,5 +43,34 @@ class User < ActiveRecord::Base
     user.save!
     user
   end
+
+
+  def self.find_or_create_from_twitter(twitter_data)
+    user = User.where(uid: twitter_data["uid"], provider: twitter_data["provider"]).first
+    user = create_from_twitter(twitter_data) unless user
+    user
+  end
+
+  def self.create_from_twitter(twitter_data)
+    user = User.new
+    user.email = twitter_data["info"]["nickname"]
+    user.uid = twitter_data["uid"]
+    user.provider = twitter_data["provider"]
+    user.twitter_consumer_token = twitter_data["credentials"]["token"]
+    user.twitter_consumer_secret = twitter_data["credentials"]["secret"]
+    user.twitter_raw_data = twitter_data
+    user.password = SecureRandom.urlsafe_base64
+    user.save!
+    user
+  end
+
+  def using_facebook?
+      using_oauth? && provider == PROVIDER_FACEBOOK
+  end
+
+  def using_twitter?
+      using_oauth? && provider == PROVIDER_TWITTER
+  end
+
 
 end

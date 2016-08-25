@@ -1,4 +1,4 @@
-<div class="well">
+<div class="well" id ="post-well-<%=dom_id(post) %>">
   <div class="posts" id="<%= dom_id(post) %>">
     <% comment = Comment.new %>
     <% comments = post.comments.order('created_at ASC') %>
@@ -12,6 +12,12 @@
       </div>
       <% if post.user == current_user %>
       <div class="titleform">|<span class="glyphicon glyphicon-sunglasses"></span></div>
+      <% end %>
+      <% if current_user.is_admin %>
+        <span class="delete post-display"><%= link_to fa_icon("times"), post_path(post),
+                              method: :delete,
+                              remote: true,
+                              data:   {confirm: "Are you sure?"}%></span>
       <% end %>
     </div>
       <p class="post-time"><%= post.created_at.strftime("%B %-d at %I:%M%P") %></p>
