@@ -1,7 +1,7 @@
 class RemoveLatitudeLongitudeIpadressFromUsers < ActiveRecord::Migration
   def change
-    remove_column :users, :latitude
-    remove_column :users, :longitude
-    remove_column :users, :ip_address
+    remove_column :users, :latitude, :float
+    remove_column :users, :longitude, :float
+    remove_column :users, :ip_address, :string
   end
 end
