@@ -25,13 +25,13 @@ class User < ActiveRecord::Base
   serialize :facebook_raw_data, Hash
   serialize :twitter_raw_data, Hash
 
-  def self.find_or_create_from_facebook(facebook_data)
+  def find_or_create_from_facebook(facebook_data)
     user = User.where(uid: facebook_data["uid"], provider: facebook_data["provider"] ).first
     user = create_from_facebook(facebook_data) unless user
     user
   end
 
-  def self.create_from_facebook(facebook_data)
+  def create_from_facebook(facebook_data)
     user = User.new
     user.email = facebook_data["info"]["email"]
     user.uid = facebook_data["uid"]
@@ -45,13 +45,13 @@ class User < ActiveRecord::Base
   end
 
 
-  def self.find_or_create_from_twitter(twitter_data)
+  def find_or_create_from_twitter(twitter_data)
     user = User.where(uid: twitter_data["uid"], provider: twitter_data["provider"]).first
     user = create_from_twitter(twitter_data) unless user
     user
   end
 
-  def self.create_from_twitter(twitter_data)
+  def create_from_twitter(twitter_data)
     user = User.new
     user.email = twitter_data["info"]["nickname"]
     user.uid = twitter_data["uid"]

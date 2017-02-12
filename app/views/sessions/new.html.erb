@@ -9,32 +9,32 @@
 <script src="assets/scripts.js"></script>
 </head>
 <body>
-        <div class="page-container">
-          <div class="sub">
-            <h1>Login</h1>
-            <%= form_tag(sessions_path) do %>
-              <%= email_field_tag :email, nil, class: "username", placeholder: "Email" %>
-              <%= password_field_tag :password, nil, class: "password", placeholder: "Password" %>
-              <%= submit_tag "Sign In", class: "button signin-btn"%>
-            <% end %>
+  <div class="page-container">
+    <div class="sub">
+      <h1>Login</h1>
+      <%= form_tag(sessions_path) do %>
+        <%= email_field_tag :email, nil, class: "username", placeholder: "Email" %>
+        <%= password_field_tag :password, nil, class: "password", placeholder: "Password" %>
+        <%= submit_tag "Sign In", class: "button signin-btn"%>
+      <% end %>
 
-            <br>
-            <br>
-            <div class="connect">
-              <p>First time using <img src='assets/logo6.png' style="  width: 100px; margin-bottom: -5px; margin-left: 1px;" /> ? </p>
+      <br>
+      <br>
+      <div class="connect">
+        <p>First time using <img src='assets/logo6.png' style="  width: 100px; margin-bottom: -5px; margin-left: 1px;" /> ? </p>
 
-              <div class="error"><span>+</span></div>
-              <div class="row login">
-                <%= button_to "Sign Up", new_user_path, class: "button", id: "signup", method: :get %>
-                <span style="font-size: 16px; margin-top: 28px;
-                   margin-left: 10px;">Or</span>
-                <div class="facebook">
-                  <a class="facebook" href="/auth/facebook"></a>
-                  <a class="twitter" href="/auth/twitter"></a>
-                  <p style="font-size: 16px;">Connect With:</p>
-                </div>
-              </div>
-            </div>
+        <div class="error"><span>+</span></div>
+        <div class="row login">
+          <%= button_to "Sign Up", new_user_path, class: "button", id: "signup", method: :get %>
+          <span style="font-size: 16px; margin-top: 28px;
+             margin-left: 10px;">Or</span>
+          <div class="facebook">
+            <a class="facebook" href="/auth/facebook"></a>
+            <a class="twitter" href="/auth/twitter"></a>
+            <p style="font-size: 16px;">Connect With:</p>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
 </body>
