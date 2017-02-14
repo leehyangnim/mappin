@@ -6,15 +6,15 @@ https://mappinyvr.herokuapp.com/
 Sign in with ID: guest@mappin.com / PW:1
 
 ## Unique Features
-** Post creation on map click
+* Post creation on map click
 
-** Post display on Google maps infowindow
+* Post display on Google maps infowindow
 
-** Image upload
+* Image upload
 
-** Like or comment notifications
+* Like or comment notifications
 
-** Displaying emojis
+* Displaying emojis
 
 ## Technical Stack
 **Front-End:** HTML5, CSS3, SASS, JavaScript, jQuery and jQuery UI, AJAX, and Bootstrap
