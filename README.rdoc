@@ -1,28 +1,32 @@
-== README
+# map'pin
+**map'pin** is a local online social networking community based on a user's location which allows users to create or pin anonymous posts on certain locations on a map.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+**Live Demo**
+https://mappinyvr.herokuapp.com/
+Sign in with ID: guest@mappin.com / PW:1
 
-Things you may want to cover:
+## Unique Features
+** Post creation on map click
 
-* Ruby version
+** Post display on Google maps infowindow
 
-* System dependencies
+** Image upload
 
-* Configuration
+** Like or comment notifications
 
-* Database creation
+** Displaying emojis
 
-* Database initialization
+## Technical Stack
+**Front-End:** HTML5, CSS3, SASS, JavaScript, jQuery and jQuery UI, AJAX, and Bootstrap
 
-* How to run the test suite
+**Back-End:** Ruby on Rails
 
-* Services (job queues, cache servers, search engines, etc.)
+**Databases:** PostgreSQL
 
-* Deployment instructions
+**APIS:** Google Maps API, Facebook API, Twitter API
 
-* ...
+**Storage:** AWS S3 Cloud
 
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+## Screenshots of map'pin
+<img src="https://s3.amazonaws.com/poly-screenshots.angel.co/Project/5f/350626/b4e0e161ee135638468321bedfcad6d3-original.png" width="850px">
+<img src="https://s3.amazonaws.com/poly-screenshots.angel.co/Project/5f/350626/d1a00735a1532fb8c6664d46f3d0a44c-original.png" width="850px">
