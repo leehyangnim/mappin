@@ -3,10 +3,8 @@ class User < ActiveRecord::Base
 
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
-
   has_many :post_likes, dependent: :destroy
   has_many :liked_posts, through: :post_likes, source: :post
-
   has_many :notifications, dependent: :destroy
 
   validates :email, presence: true,
@@ -15,15 +13,16 @@ class User < ActiveRecord::Base
                     unless: :using_oauth?
   validates :uid, uniqueness: {scope: :provider}, if: :using_oauth?
 
-  def using_oauth?
-    uid.present? && provider.present?
-  end
 
   PROVIDER_FACEBOOK = "facebook"
   PROVIDER_TWITTER = "twitter"
 
   serialize :facebook_raw_data, Hash
   serialize :twitter_raw_data, Hash
+
+  def using_oauth?
+    uid.present? && provider.present?
+  end
 
   def find_or_create_from_facebook(facebook_data)
     user = User.where(uid: facebook_data["uid"], provider: facebook_data["provider"] ).first
@@ -43,7 +42,6 @@ class User < ActiveRecord::Base
     user.save!
     user
   end
-
 
   def find_or_create_from_twitter(twitter_data)
     user = User.where(uid: twitter_data["uid"], provider: twitter_data["provider"]).first
