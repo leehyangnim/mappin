@@ -11,7 +11,7 @@
         <%= render "post_likes/form", post: post %>
       </div>
       <% if post.user == current_user %>
-      <div class="titleform">|<span class="glyphicon glyphicon-sunglasses"></span></div>
+        <div class="titleform">|<span class="glyphicon glyphicon-sunglasses"></span></div>
       <% end %>
       <% if current_user.is_admin %>
         <span class="delete post-display"><%= link_to fa_icon("times"), post_path(post),

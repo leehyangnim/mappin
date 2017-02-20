@@ -29,4 +29,5 @@ Sign in with ID: guest@mappin.com / PW:1
 
 ## Screenshots of map'pin
 <img src="https://s3.amazonaws.com/poly-screenshots.angel.co/Project/5f/350626/b4e0e161ee135638468321bedfcad6d3-original.png" width="850px">
+
 <img src="https://s3.amazonaws.com/poly-screenshots.angel.co/Project/5f/350626/d1a00735a1532fb8c6664d46f3d0a44c-original.png" width="850px">

@@ -1,17 +1,17 @@
 <div class = 'well'>
   <legend>New Pin</legend>
   <div class= 'new-post'>
-  <%= simple_form_for(@post || Post.new, url:posts_path) do |f| %>
-    <%= f.input :title %>
-    <%= f.input :body %>
-    <%= f.input :image %>
-    <% if @longitude && @latitude %>
-      <%= f.hidden_field :longitude, value: @longitude  %>
-      <%= f.hidden_field :latitude, value: @latitude  %>
+    <%= simple_form_for(@post || Post.new, url:posts_path) do |f| %>
+      <%= f.input :title %>
+      <%= f.input :body %>
+      <%= f.input :image %>
+      <% if @longitude && @latitude %>
+        <%= f.hidden_field :longitude, value: @longitude  %>
+        <%= f.hidden_field :latitude, value: @latitude  %>
+      <% end %>
+      <div class='map-button'>
+        <%= f.button :submit%>
+      </div>
     <% end %>
-    <div class='map-button'>
-      <%= f.button :submit%>
-    </div>
-  <% end %>
-</div>
+  </div>
 </div>
